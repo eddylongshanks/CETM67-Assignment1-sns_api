@@ -26,13 +26,8 @@ class GetTopics(Resource):
 class PublishMessage(Resource):
     def post(self):
         try:
-            data = request.json
-            print(data)
-
-            sns.publish(
-                TopicArn=topic_arn,
-                Message=json.dumps(data)
-                )
+            data = get_data(request)
+            send_to_sns(data)
 
             return "Success"
         except:
@@ -42,6 +37,20 @@ class PublishMessage(Resource):
 ## Routing ##
 api.add_resource(GetTopics, '/get-topics')
 api.add_resource(PublishMessage, '/send')
+    
+def get_data(req):
+    try:
+        body = req.json
+        
+        return body
+    except:
+        raise
+
+def send_to_sns(data):
+    sns.publish(
+        TopicArn=topic_arn,
+        Message=json.dumps(data)
+        )
 
 if __name__ == "__main__":
     app.run(debug=True)
