@@ -12,13 +12,13 @@ def lambda_handler(event, context):
         
         return {
             'statusCode': 200,
-            'body': "Message Sent"
+            'body': "Message Sent, by SNS API"
         }
     except Exception as e:
         return {
-            'statusCode': 200,
+            'statusCode': 500,
             'headers': {},
-            'body': json.dumps(str(e))
+            'body': json.dumps('Error: ' + str(e) + ' event: ' + str(event))
         }
     
 def get_data(event):

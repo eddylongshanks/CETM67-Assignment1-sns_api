@@ -12,8 +12,7 @@ BASE_URL = "http://127.0.0.1:5000"
 # data4 = "{'id':'rehekjr743478','first_name':'sns_api4','email_address':'test@holmescentral.co.uk'}
 
 data = {
-	"id": "reh3443f743478",
-	"first_name": "sns_api_email2",
+	"first_name": "vs_SNS_API1",
 	"email_address": "test@holmescentral.co.uk"
 }
 
