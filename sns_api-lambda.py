@@ -1,3 +1,6 @@
+''' SNS Packager
+'''
+
 import json
 import boto3
 import botocore.exceptions
