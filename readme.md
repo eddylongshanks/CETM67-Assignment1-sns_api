@@ -5,8 +5,8 @@ Include the following key values in a request:
 
 ```python
 {
-	"first_name": "vs_SNS_API1",
-	"email_address": "test@holmescentral.co.uk"
+	"first_name": "[first name]",
+	"email_address": "[email address]"
 }
 ```
 
