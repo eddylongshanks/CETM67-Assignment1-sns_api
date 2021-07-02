@@ -10,18 +10,15 @@ def lambda_handler(event, context):
         data = get_data(event)
         send_to_sns(data)
         
-        return {
-            'statusCode': 200,
-            'body': "Message Sent, by SNS API"
-        }
+        response_message = "Message Sent, by SNS API"
+        return response_object(200, response_message)
+
     except Exception as e:
-        return {
-            'statusCode': 500,
-            'headers': {},
-            'body': json.dumps('Error: ' + str(e) + ' event: ' + str(event))
-        }
+        response_message = 'Error: ' + str(e) + ' event: ' + str(event)
+        return response_object(500, response_message)
     
 def get_data(event):
+    # extracts data from the event body and returns it
     try:
         body = json.loads(event['body'])
         
@@ -30,7 +27,15 @@ def get_data(event):
         raise
 
 def send_to_sns(data):
+    # packages data into SNS message and publishes to the queue
     sns.publish(
         TopicArn=topic_arn,
         Message=json.dumps(data)
         )
+  
+def response_object(status_code, message):
+    # encapsulates the return object
+    return {
+        'statusCode': status_code,
+        'body': message
+    }
